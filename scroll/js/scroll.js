@@ -1,15 +1,28 @@
 const sections = document.querySelectorAll('section');
-const lis = document.querySelectorAll('ul li');
-let posArr = [];
+const ul = document.querySelector('ul');
+const lis = ul.querySelectorAll('li');
+const lis_arr = Array.from(lis);
+let posArr = null;
+console.log(lis_arr);
+//페이지 로딩시 세로위치값 구하기
+setPos();
 
-// section의 세로값을 빈배열 posArr로 넣기
-for (const section of sections) {
-	posArr.push(section.offsetTop);
-}
+//resize 되었을때 setPos 함수 호출
+window.addEventListener('resize', () => {
+	setPos();
 
+	//resize 시 버튼과 섹션의 매칭되지 않는 문제 해결
+	//현재 활성화 버튼의 순번을 구해서 브라우저의 스크롤값을 해당 섹션위치로 이동
+	const active = ul.querySelector('li.on');
+	const activeIndex = lis_arr.indexOf(active);
+	window.scroll(0, posArr[activeIndex]);
+	console.log(activeIndex);
+});
+
+//li의 갯수만큼 반복을 돌면서 클릭이벤트 바인딩
 lis.forEach((li, idx) => {
 	//li를 클릭했을때
-	li.addEventListener('click', (e) => {
+	li.addEventListener('click', () => {
 		//브라우저를 각 섹션의 세로위치값으로 이동
 		moveScroll(idx);
 		//모든 버튼을 비활성화하고
@@ -22,7 +35,7 @@ lis.forEach((li, idx) => {
 });
 
 //브라우저에 스크롤했을 때 버튼 활성화
-window.addEventListener('scroll', (e) => {
+window.addEventListener('scroll', () => {
 	activation();
 });
 
@@ -55,4 +68,14 @@ function moveScroll(idx) {
 		value: posArr[idx],
 		duration: 500,
 	});
+}
+
+//각 섹션의 세로 위치값을 구해서 배열에 넣는 함수 정의
+function setPos() {
+	posArr = [];
+	// section의 세로값을 빈배열 posArr로 넣기
+	for (const section of sections) {
+		posArr.push(section.offsetTop);
+	}
+	console.log(posArr);
 }
