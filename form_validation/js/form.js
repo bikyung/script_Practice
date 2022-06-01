@@ -1,10 +1,3 @@
-/* 
-form_ validation 유효성 검사 
-만약 input에 값을 입력하지 않거나,또는 조건을 만족하지 않는다면 
-id,password, select, radio, checkobx, email,textarea
-submit 버튼을 클릭했을때 e.preventDefault로 페이지 이동 방지
-*/
-
 const form = document.querySelector('#member');
 const btnSubmit = form.querySelector('input[type=submit]');
 //제출 버튼을 클릭했을때
@@ -16,6 +9,7 @@ btnSubmit.addEventListener('click', (e) => {
 	if (!isCheck('hobby')) e.preventDefault();
 	if (!isCheck('gender')) e.preventDefault();
 	if (!isSelect('edu')) e.preventDefault();
+	if (!isPwd('pwd1', 'pwd2', 5)) e.preventDefault();
 });
 
 function isTxt(name, len) {
@@ -106,6 +100,40 @@ function isSelect(name) {
 		const errMsg = document.createElement('p');
 		errMsg.append('항목을 선택해주세요.');
 		sel.closest('td').append(errMsg);
+		return false;
+	}
+}
+
+function isPwd(name1, name2, len) {
+	const pwd1 = form.querySelector(`[name=${name1}]`);
+	const pwd2 = form.querySelector(`[name=${name2}]`);
+	const pwd1_val = pwd1.value;
+	const pwd2_val = pwd2.value;
+
+	const num = /[0-9]/;
+	const eng = /[a-zA-Z]/;
+	const spc = /[!@#$%^&*()_+|[\]<>]/;
+
+	//두개의 비번이 같고 비번에 숫자, 문자, 특수문자를 모두 포함하고 len개이상의 글자수라면
+	if (
+		pwd1_val === pwd2_val &&
+		num.test(pwd1.val) &&
+		eng.test(pwd1.val) &&
+		spc.test(pwd1.val) &&
+		pwd1.val.length > len
+	) {
+		const errMsgs = pwd1.closest('td').querySelectorAll('p');
+		if (errMsgs.length > 0) pwd1.closest('td').querySelector('p').remove();
+		return true;
+	} else {
+		const errMsgs = pwd1.closest('td').querySelectorAll('p');
+		if (errMsgs.length > 0) pwd1.closest('td').querySelector('p').remove();
+
+		const errMsg = document.createElement('p');
+		errMsg.append(
+			`비밀번호는 ${len}글자 이상,영문,숫자,특수문자를 모두 포함하여 입력하세요.`
+		);
+		pwd1.closest('td').append(errMsg);
 		return false;
 	}
 }
