@@ -1,0 +1,89 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+ul,
+ol,
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+main {
+  width: 100%;
+  padding: 50px;
+}
+main .loading {
+  width: 500px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: 0.5s;
+}
+main .loading.off {
+  opacity: 0;
+}
+main section {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  opacity: 0;
+  transform: translateY(100px);
+  transition: 1s;
+}
+main section.on {
+  opacity: 1;
+  transform: translateY(0px);
+}
+main section::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+main section .item {
+  width: 16.6666666667%;
+  float: left;
+  padding: 10px;
+}
+main section .item > div {
+  width: 100%;
+  background: #fff;
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5);
+  padding: 10px;
+}
+main section .item > div .pic {
+  display: block;
+  width: 100%;
+}
+main section .item > div .pic img {
+  width: 100%;
+}
+main section .item > div p {
+  font: 12px/1.2 "arial";
+  color: #777;
+  padding: 10px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+main section .item > div .profile {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+main section .item > div .profile img {
+  width: 25px;
+  border-radius: 0%;
+  margin-right: 10px;
+}
+main section .item > div .profile span {
+  font: 11px/1 "arial";
+  color: #999;
+}
+
+/*# sourceMappingURL=style.css.map */
