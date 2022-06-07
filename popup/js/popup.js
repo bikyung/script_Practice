@@ -3,12 +3,10 @@ const btnDel = document.querySelector('.del');
 const popup = document.querySelector('#popup');
 const btnClose = popup.querySelector('.close');
 const isCookie = document.cookie.indexOf('today=done');
+let isOn;
 
-if (isCookie == -1) {
-	popup.style.display = 'block';
-} else {
-	popup.style.display = 'none';
-}
+isCookie === -1 ? (isOn = 'block') : (isOn = 'none');
+popup.style.display = isOn;
 
 //쿠키 삭제 버튼
 btnDel.addEventListener('click', (e) => {
