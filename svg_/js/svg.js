@@ -3,6 +3,10 @@ const lis = document.querySelectorAll('ul li');
 const base = -300;
 let posArr = [];
 
+const apple = document.querySelector('.apple path');
+
+console.log(apple.getTotalLength());
+
 //section의 세로위치값을 배열에 저장
 for (const section of sections) {
 	posArr.push(section.offsetTop);

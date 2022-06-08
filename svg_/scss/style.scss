@@ -23,6 +23,23 @@ section {
 	}
 	&:nth-of-type(2) {
 		background: lightblue;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		svg path {
+			fill: transparent;
+			stroke: #000;
+			stroke-dasharray: 1785;
+			stroke-dashoffset: 1785;
+			transition: stroke-dashoffset 2s 0s, fill 1s 2s;
+		}
+		&.on {
+			svg path {
+				stroke-dashoffset: 0;
+				fill: lightgreen;
+			}
+		}
 	}
 	&:nth-of-type(3) {
 		background: lightgreen;
