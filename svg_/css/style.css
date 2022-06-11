@@ -19,8 +19,24 @@ section {
   position: relative;
   height: 1000px;
 }
+section article {
+  width: 600px;
+}
 section:nth-of-type(1) {
   background: orange;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+section:nth-of-type(1) svg path {
+  fill: transparent;
+  stroke: #000;
+  stroke-dasharray: 1480;
+  stroke-dashoffset: 1480;
+  transition: stroke-dashoffset 2s 0s, fill 1s 2s;
+}
+section:nth-of-type(1).on svg path {
+  stroke-dashoffset: 0;
 }
 section:nth-of-type(2) {
   background: lightblue;
@@ -31,19 +47,35 @@ section:nth-of-type(2) {
 section:nth-of-type(2) svg path {
   fill: transparent;
   stroke: #000;
-  stroke-dasharray: 1785;
-  stroke-dashoffset: 1785;
+  stroke-dasharray: 1600;
+  stroke-dashoffset: 1600;
   transition: stroke-dashoffset 2s 0s, fill 1s 2s;
-}
-section:nth-of-type(2).on svg path {
-  stroke-dashoffset: 0;
-  fill: lightgreen;
 }
 section:nth-of-type(3) {
   background: lightgreen;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+section:nth-of-type(3) svg path {
+  fill: transparent;
+  stroke: #000;
+  stroke-dasharray: 1105;
+  stroke-dashoffset: 1105;
+  transition: stroke-dashoffset 2s 0s, fill 1s 2s;
 }
 section:nth-of-type(4) {
   background: hotpink;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+section:nth-of-type(4) svg path {
+  fill: transparent;
+  stroke: #000;
+  stroke-dasharray: 2555;
+  stroke-dashoffset: 2555;
+  transition: stroke-dashoffset 2s 0s, fill 1s 2s;
 }
 
 ul {

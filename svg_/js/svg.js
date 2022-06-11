@@ -3,9 +3,7 @@ const lis = document.querySelectorAll('ul li');
 const base = -300;
 let posArr = [];
 
-const apple = document.querySelector('.apple path');
-
-console.log(apple.getTotalLength());
+const basket = document.querySelector('.basket path');
 
 //section의 세로위치값을 배열에 저장
 for (const section of sections) {
@@ -14,22 +12,30 @@ for (const section of sections) {
 
 //브라우저에서 스크롤 할 때
 window.addEventListener('scroll', (e) => {
-	//현재 스크롤한 값을 변수에 담아서
 	let scroll = window.scrollY || window.pageYOffset;
 
-	sections.forEach((el, idx) => {
-		//scroll값이 해당섹션의 값보다 크거나 같을 경우 해당 순번의 li만 활성화
+	sections.forEach((section, idx) => {
 		if (scroll >= posArr[idx] + base) {
-			for (const li of lis) {
-				li.classList.remove('on');
-				lis[idx].classList.add('on');
+			for (let i = 0; i < sections.length; i++) {
+				lis[i].classList.remove('on');
+				sections[i].classList.remove('on');
 			}
-			for (const section of sections) {
-				section.classList.remove('on');
-				sections[idx].classList.add('on');
-			}
+			lis[idx].classList.add('on');
+			sections[idx].classList.add('on');
 		}
 	});
+	const path = sections[1].querySelector('path');
+	console.log(scroll);
+	console.log(posArr[1]);
+	if (scroll >= posArr[1] + base) {
+		let cScroll = scroll - (posArr[1] + base * 2);
+		cScroll = cScroll * 4;
+
+		if (cScroll >= 1600) cScroll = 1600;
+		path.style.strokeDashoffset = 1600 - cScroll;
+	} else {
+		path.style.strokeDashoffset = 1600;
+	}
 });
 
 //ul li 버튼 클릭시 해당 section으로 이동
