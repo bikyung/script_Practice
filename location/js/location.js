@@ -7,6 +7,7 @@ const options = {
 
 const t_on = document.querySelectorAll('.traffic li')[0];
 const t_off = document.querySelectorAll('.traffic li')[1];
+const branchs = document.querySelectorAll('.branch li');
 console.log(t_off);
 // 이동 이동 가능
 const drag = true;
@@ -23,6 +24,7 @@ var markerOptions = [
 		imgSrc: 'img/marker_1.png',
 		imgSize: new kakao.maps.Size(232, 99),
 		imgPos: { offset: new kakao.maps.Point(116, 99) },
+		button: branchs[0],
 	},
 	{
 		title: '인천 부평점',
@@ -30,6 +32,7 @@ var markerOptions = [
 		imgSrc: 'img/marker_2.png',
 		imgSize: new kakao.maps.Size(232, 99),
 		imgPos: { offset: new kakao.maps.Point(116, 99) },
+		button: branchs[1],
 	},
 	{
 		title: '인천 주안점',
@@ -37,25 +40,40 @@ var markerOptions = [
 		imgSrc: 'img/marker_3.png',
 		imgSize: new kakao.maps.Size(232, 99),
 		imgPos: { offset: new kakao.maps.Point(116, 99) },
+		button: branchs[2],
 	},
 ];
 
+//반복을 돌면서 마커를 특정 이미지로 특정위치에 배치
 for (let i = 0; i < markerOptions.length; i++) {
-	var marker = new kakao.maps.Marker({
+	new kakao.maps.Marker({
 		map: map,
 		position: markerOptions[i].latlng,
 		title: markerOptions[i].title,
-		img: new kakao.maps.markerImage(
+		image: new kakao.maps.MarkerImage(
 			markerOptions[i].imgSrc,
 			markerOptions[i].imgSize,
 			markerOptions[i].imgPos
 		),
 	});
-}
-// 지도를 클릭한 위치에 표출할 마커입니다
 
-// 지도에 마커를 표시합니다
-marker.setMap(map);
+	//branch 버튼 클릭 이벤트 연결
+	markerOptions[i].button.addEventListener('click', (e) => {
+		e.preventDefault();
+		for (const btn of branchs) {
+			btn.classList.remove('on');
+		}
+		branchs[i].classList.add('on');
+		moveTo(markerOptions[i].latlng);
+	});
+}
+
+window.addEventListener('resize', () => {
+	let active_btn = document.querySelector('.branch li.on');
+	let active_index = active_btn.getAttribute('data-index');
+	console.log(active_index);
+	map.setCenter(markerOptions[1].latlng);
+});
 
 //컨트롤 보이기
 const mapTypeControl = new kakao.maps.MapTypeControl();
@@ -93,4 +111,9 @@ setZoomable(zoom);
 function setZoomable(zoomable) {
 	// 마우스 휠로 지도 확대,축소 가능여부를 설정합니다
 	map.setZoomable(zoomable);
+}
+
+function moveTo(target) {
+	const moveLatLon = target;
+	map.setCenter(moveLatLon);
 }

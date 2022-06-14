@@ -23,6 +23,7 @@ a {
 
 .traffic {
   display: flex;
+  margin-bottom: 30px;
 }
 .traffic li {
   margin-right: 20px;
@@ -38,6 +39,28 @@ a {
   border: 1px solid #000;
 }
 .traffic li.on a {
+  background: #fff;
+  color: #333;
+}
+
+.branch {
+  display: flex;
+  flex-direction: column;
+}
+.branch li {
+  margin-bottom: 10px;
+}
+.branch li a {
+  display: block;
+  width: 200px;
+  height: 40px;
+  font: bold 12px/40px "arial";
+  color: #fff;
+  background: #000;
+  text-align: center;
+  border: 1px solid #000;
+}
+.branch li.on a {
   background: #fff;
   color: #333;
 }
