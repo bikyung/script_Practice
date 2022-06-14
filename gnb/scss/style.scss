@@ -1,0 +1,100 @@
+@charset "UTF-8";
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+ul,
+ol,
+li {
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+}
+
+#skipNavi li a {
+	display: block;
+	width: 100%;
+	height: 40px;
+	background: darkblue;
+	font: bold 15px/40px '맑은 고딕';
+	text-align: center;
+	color: #fff;
+	position: fixed;
+	left: 0;
+	top: -40px;
+	&.on {
+		top: 0px;
+	}
+}
+#header {
+	width: 100%;
+	border-bottom: 1px solid #bbb;
+
+	.inner {
+		width: 1180px;
+		height: 120px;
+		margin: 0 auto;
+		position: relative;
+
+		h1 {
+			position: absolute;
+			left: 0;
+			bottom: 20px;
+		}
+
+		#gnb {
+			position: absolute;
+			right: 0;
+			bottom: 0;
+
+			> li {
+				float: left;
+				> a {
+					display: block;
+					width: 150px;
+					height: 60px;
+					font: bold 16px/60px 'arial';
+					color: #333;
+					text-align: center;
+					&:hover {
+						background: #555;
+						color: #fff;
+					}
+					&.on {
+						background: #555;
+						color: #fff;
+					}
+				}
+				.sub {
+					width: 1180px;
+					height: 200px;
+					background: #555;
+					position: absolute;
+					right: 0;
+					top: 60px;
+					display: none;
+
+					ul li a {
+						position: relative;
+						color: orange;
+					}
+					&::before {
+						content: '';
+						display: block;
+						width: 100vw;
+						height: 200px;
+						background: #555;
+						position: absolute;
+						top: 0;
+						left: 50%;
+						transform: translateX(-50%);
+					}
+				}
+			}
+		}
+	}
+}
